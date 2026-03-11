@@ -5,7 +5,8 @@ if (canvas) {
     let bubbles = [];
     const skills = [
         'React', 'JavaScript', 'Node.js', 'CSS', 'HTML', 'Next.js', 'Vite', 
-        'Docker', 'AWS', 'Python', 'Figma',  'SQL', 'Git', 'MongoDB', 'Kubernetes','Java','C','DSA'
+        'Docker', 'AWS', 'Python', 'Figma',  'SQL', 'Git', 'MongoDB', 'Kubernetes','Java','C','DSA',
+        'MERN Stack', 'PFSD', 'JFSD'
         ];
 
     const resize = () => {
