@@ -104,12 +104,14 @@ function initHeroBackground() {
     let particles = [];
 
     const resize = () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
+        width = canvas.width = canvas.offsetWidth;
+        height = canvas.height = canvas.offsetHeight;
     };
 
     window.addEventListener('resize', resize);
     resize();
+    // Initial delay to wait for layout
+    setTimeout(resize, 100);
 
     class Particle {
         constructor() {
