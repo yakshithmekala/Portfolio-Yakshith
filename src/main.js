@@ -115,29 +115,45 @@ function initHeroBackground() {
         constructor() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.size = Math.random() * 2 + 1;
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
-            this.color = `rgba(99, 102, 241, ${Math.random() * 0.3 + 0.1})`;
+            this.size = Math.random() * 1.5 + 0.5; // Smaller stars
+            this.vx = (Math.random() - 0.5) * 0.2; // Slower drift
+            this.vy = (Math.random() - 0.5) * 0.2;
+            this.twinkleSpeed = Math.random() * 0.05 + 0.01;
+            this.alpha = Math.random();
+            this.color = `rgba(255, 255, 255, ${this.alpha})`;
         }
 
         update() {
             this.x += this.vx;
             this.y += this.vy;
 
-            if (this.x < 0 || this.x > width) this.vx *= -1;
-            if (this.y < 0 || this.y > height) this.vy *= -1;
+            // Twinkle effect
+            this.alpha += this.twinkleSpeed;
+            if (this.alpha > 1 || this.alpha < 0.2) this.twinkleSpeed *= -1;
+
+            if (this.x < 0) this.x = width;
+            if (this.x > width) this.x = 0;
+            if (this.y < 0) this.y = height;
+            if (this.y > height) this.y = 0;
         }
 
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
+            ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
             ctx.fill();
+            
+            // Subtle glow for larger stars
+            if (this.size > 1.2) {
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = 'var(--accent-primary)';
+            } else {
+                ctx.shadowBlur = 0;
+            }
         }
     }
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 150; i++) { // More stars
         particles.push(new Particle());
     }
 
