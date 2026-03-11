@@ -19,7 +19,7 @@ if (canvas) {
     class Bubble {
         constructor(text) {
             this.text = text;
-            this.radius = text.length * 6 + 20;
+            this.radius = text.length * 4 + 15;
             this.x = Math.random() * (width - this.radius * 2) + this.radius;
             this.y = Math.random() * (height - this.radius * 2) + this.radius;
             this.vx = (Math.random() - 0.5) * 2;
