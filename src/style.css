@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --accent-primary: #6366f1; /* Indigo */
+  --accent-secondary: #a78bfa; /* Violet */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover: rgba(255, 255, 255, 0.06);
+  --bento-radius: 24px;
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* Nav Bar */
+nav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 900px;
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  padding: 12px 24px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: var(--transition-smooth);
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.5px;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--text-primary);
+}
+
+/* Bento Layout */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 20px;
+}
+
+.bento-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--bento-radius);
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.bento-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.1);
+  transform: translateY(-5px);
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-link {
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.social-link:hover h3 {
+  color: var(--accent-primary);
+}
+
+.social-link svg {
+  transition: var(--transition-smooth);
+}
+
+.social-link:hover svg {
+  transform: rotate(15deg) scale(1.2);
+  color: var(--accent-primary);
+}
+
+footer {
+  margin-top: 100px;
+  padding: 40px 0;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.social-list {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.social-list a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+}
+
+.social-list a:hover {
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 20px;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+}
+
+.magnetic-text {
+  display: inline-block;
+  cursor: default;
+}
+
+.glass-pill {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+.btn {
+  padding: 12px 28px;
+  border-radius: 100px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent-secondary);
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.4);
+}
+
+/* Section Header */
+.section-header {
+  margin-bottom: 50px;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.section-header p {
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* Add a mobile menu later if needed */
+  }
+  
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero h1 {
+    font-size: 3.5rem;
+  }
+}
+
+/* Animations - Initial Hidden State */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+}

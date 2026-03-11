@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education | Yakshith</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <style>
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--glass-border);
+            top: 0;
+            bottom: 0;
+            left: 20px;
+        }
+        .timeline-item {
+            padding: 20px 0 20px 50px;
+            position: relative;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            left: 15px;
+            top: 25px;
+            z-index: 1;
+            box-shadow: 0 0 10px var(--accent-primary);
+        }
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">YAKSHITH</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/projects.html">Projects</a>
+            <a href="/education.html" class="active">Education</a>
+            <a href="/skills.html">Skills</a>
+            <a href="/certifications.html">Certifications</a>
+            <a href="/contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="section-header reveal">
+            <div class="glass-pill">Academic Journey</div>
+            <h2>Educational Background</h2>
+            <p>A timeline of my formal education and continuous learning efforts.</p>
+        </header>
+
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-date">2023 - 2027</div>
+                <h3>B.Tech in Computer Science</h3>
+                <p style="color: var(--text-secondary);">KL University, Hyderabad - CGPA : 9.4</p>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-secondary);">Focused in Data Engineering with AI.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-date">2021 - 2023</div>
+                <h3>Intermediate Education</h3>
+                <p style="color: var(--text-secondary);">Narayana Junior College, Hyderabad - Percentage : 94%</p>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-secondary);">MPC.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-date">2020 - 2021</div>
+                <h3>Sankalp High School</h3>
+                <p style="color: var(--text-secondary);">SSC - GPA : 10.</p>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-secondary);">Developed disiplane, time management skills, and a strong foundation in core subjects.</p>
+            </div>
+        </div>
+
+        <footer class="reveal" style="padding: 40px 0;">
+            <div>© 2026 Yakshith. All rights reserved.</div>
+            <ul class="social-list">
+                <li><a href="https://www.linkedin.com/in/yakshithreddy/" target="_blank" title="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a></li>
+                <li><a href="https://github.com/yakshithmekala" target="_blank" title="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></li>
+                <li><a href="mailto:yakshithreddym@gmail.com" title="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a></li>
+            </ul>
+        </footer>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

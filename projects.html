@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Yakshith</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <style>
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+        }
+        .project-card {
+            height: 480px;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(180deg, rgba(10,10,10,0) 50%, rgba(10,10,10,0.8) 100%), var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--bento-radius);
+            padding: 30px;
+            position: relative;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">YAKSHITH</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/projects.html" class="active">Projects</a>
+            <a href="/education.html">Education</a>
+            <a href="/skills.html">Skills</a>
+            <a href="/certifications.html">Certifications</a>
+            <a href="/contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="section-header reveal">
+            <div class="glass-pill">Selected Works</div>
+            <h2>Creative Showcase</h2>
+            <p>A collection of projects where I've challenged myself to learn new technologies and paradigms.</p>
+        </header>
+
+        <div class="project-grid">
+            <a href="https://github.com/yakshithmekala/cibil-risk-manager" target="_blank" class="project-card reveal">
+                <div class="project-tags">
+                    <span class="tag">React</span>
+                    <span class="tag">Three.js</span>
+                </div>
+                <h3>Cibil Risk Manager</h3>
+                <p style="color: var(--text-secondary); margin-top: 10px;">Cyber Risk Manager responsible for identifying security threats, assessing risks, and protecting digital systems and data.</p>
+                <div style="margin-top: auto; padding-top: 20px;">
+                    <span class="btn btn-primary" style="padding: 8px 20px; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; width: fit-content;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View Repository
+                    </span>
+                </div>
+            </a>
+            <a href="https://github.com/yakshithmekala/ai-code-reviewer" target="_blank" class="project-card reveal">
+                <div class="project-tags">
+                    <span class="tag">Next.js</span>
+                    <span class="tag">GraphQL</span>
+                </div>
+                <h3>Ai-Code Reviewer</h3>
+                <p style="color: var(--text-secondary); margin-top: 10px;">AI tool that analyzes code and suggests fixes for better efficiency and reliability.</p>
+                <div style="margin-top: auto; padding-top: 20px;">
+                    <span class="btn btn-primary" style="padding: 8px 20px; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; width: fit-content;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View Repository
+                    </span>
+                </div>
+            </a>
+            <a href="https://github.com/yakshithmekala/Safety-Object-Detection-Duality-AI" target="_blank" class="project-card reveal">
+                <div class="project-tags">
+                    <span class="tag">Node.js</span>
+                    <span class="tag">Socket.io</span>
+                </div>
+                <h3>Safety-Object-Detection-Duality-AI</h3>
+                <p style="color: var(--text-secondary); margin-top: 10px;">AI system that detects safety-related objects in real time using computer vision.</p>
+                <div style="margin-top: auto; padding-top: 20px;">
+                    <span class="btn btn-primary" style="padding: 8px 20px; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; width: fit-content;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View Repository
+                    </span>
+                </div>
+            </a>
+            <a href="https://github.com/yakshithmekala/aura-vision" target="_blank" class="project-card reveal">
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">TensorFlow</span>
+                </div>
+                <h3>Aura Vision</h3>
+                <p style="color: var(--text-secondary); margin-top: 10px;">Real-time computer vision for accessible navigation systems.</p>
+                <div style="margin-top: auto; padding-top: 20px;">
+                    <span class="btn btn-primary" style="padding: 8px 20px; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; width: fit-content;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View Repository
+                    </span>
+                </div>
+            </a>
+        </div>
+
+        <footer class="reveal" style="padding: 40px 0;">
+            <div>© 2026 Yakshith. All rights reserved.</div>
+            <ul class="social-list">
+                <li><a href="https://www.linkedin.com/in/yakshithreddy/" target="_blank" title="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a></li>
+                <li><a href="https://github.com/yakshithmekala" target="_blank" title="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></li>
+                <li><a href="mailto:yakshithreddym@gmail.com" title="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a></li>
+            </ul>
+        </footer>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
