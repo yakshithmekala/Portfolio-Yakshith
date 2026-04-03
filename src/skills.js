@@ -142,7 +142,7 @@ if (canvas) {
                     c.style.boxShadow = '';
                 });
                 card.style.borderColor = 'var(--accent-primary)';
-                card.style.boxShadow = '0 0 30px rgba(99, 102, 241, 0.2)';
+                card.style.boxShadow = '0 0 30px rgba(255, 87, 34, 0.2)';
             }
         });
     });

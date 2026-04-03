@@ -3,8 +3,8 @@
 :root {
   --bg-primary: #0a0a0a;
   --bg-secondary: #141414;
-  --accent-primary: #6366f1; /* Indigo */
-  --accent-secondary: #a78bfa; /* Violet */
+  --accent-primary: #ff5722; /* Ember */
+  --accent-secondary: #d4a373; /* Dust */
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.6);
   --glass-bg: rgba(255, 255, 255, 0.03);
