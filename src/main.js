@@ -8,19 +8,195 @@ const certs = [
     { title: "Meta Front-End Developer", issuer: "Meta", date: "Jun 2023", link: "#" }
 ];
 
-function renderCertifications() {
-    const container = document.getElementById('certifications-container');
-    if (!container) return;
+const homeDragState = {
+    active: false,
+    suppressUntil: 0
+};
 
-    container.innerHTML = certs.map(cert => `
-        <div class="bento-card" style="display: flex; justify-content: space-between; align-items: center; opacity: 0;">
-            <div>
-                <h3>${cert.title}</h3>
-                <p style="color: var(--text-secondary); margin-top: 5px;">${cert.issuer} | Issued ${cert.date}</p>
-            </div>
-            <a href="${cert.link}" target="_blank" class="btn btn-primary">Verify</a>
-        </div>
-    `).join('');
+function renderCertifications() {
+    const board = document.getElementById('certifications-puzzle');
+    const status = document.getElementById('certifications-status');
+    if (!board || !status) return;
+
+    const shuffle = (items) => {
+        const copy = [...items];
+        for (let i = copy.length - 1; i > 0; i -= 1) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+    };
+
+    const escapeHtml = (value) => value
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+
+    const wrapTitle = (title, maxChars = 18, maxLines = 3) => {
+        const words = title.split(' ');
+        const lines = [];
+        let current = '';
+
+        words.forEach((word) => {
+            const next = current ? `${current} ${word}` : word;
+            if (next.length <= maxChars || lines.length === maxLines - 1) {
+                current = next;
+                return;
+            }
+
+            if (current) lines.push(current);
+            current = word;
+        });
+
+        if (current) lines.push(current);
+        return lines.slice(0, maxLines);
+    };
+
+    const midpoint = (a, b) => ({
+        x: (a.x + b.x) / 2,
+        y: (a.y + b.y) / 2
+    });
+
+    const lerpPoint = (a, b, t) => ({
+        x: a.x + (b.x - a.x) * t,
+        y: a.y + (b.y - a.y) * t
+    });
+
+    const createRegularPolygon = (count, radius, rotation = -Math.PI / 2) => (
+        Array.from({ length: count }, (_, index) => {
+            const angle = rotation + (index * Math.PI * 2) / count;
+            return {
+                x: 50 + radius * Math.cos(angle),
+                y: 50 + radius * Math.sin(angle)
+            };
+        })
+    );
+
+    const toPointString = (points) => (
+        points.map(({ x, y }) => `${x.toFixed(3)}% ${y.toFixed(3)}%`).join(', ')
+    );
+
+    const revealed = new Set();
+    const shuffledCerts = shuffle(certs);
+    const outerPoints = createRegularPolygon(shuffledCerts.length, 46);
+    const innerPoints = createRegularPolygon(shuffledCerts.length, 16);
+    const hubPoints = toPointString(innerPoints);
+    const segmentThemes = [
+        {
+            top: 'rgba(255, 177, 145, 0.18)',
+            bottom: 'rgba(255, 140, 92, 0.06)',
+            border: 'rgba(255, 188, 160, 0.34)'
+        },
+        {
+            top: 'rgba(255, 224, 166, 0.18)',
+            bottom: 'rgba(255, 194, 92, 0.06)',
+            border: 'rgba(247, 221, 170, 0.34)'
+        },
+        {
+            top: 'rgba(167, 240, 228, 0.18)',
+            bottom: 'rgba(72, 214, 188, 0.06)',
+            border: 'rgba(173, 242, 231, 0.34)'
+        },
+        {
+            top: 'rgba(177, 219, 255, 0.18)',
+            bottom: 'rgba(99, 180, 255, 0.06)',
+            border: 'rgba(186, 224, 255, 0.34)'
+        },
+        {
+            top: 'rgba(222, 209, 255, 0.18)',
+            bottom: 'rgba(177, 147, 255, 0.06)',
+            border: 'rgba(226, 214, 255, 0.34)'
+        }
+    ];
+
+    const renderBoard = () => {
+        board.innerHTML = '';
+        status.textContent = `${revealed.size} / ${shuffledCerts.length} unlocked`;
+
+        shuffledCerts.forEach((cert, index) => {
+            const nextIndex = (index + 1) % shuffledCerts.length;
+            const clipPoints = [
+                outerPoints[index],
+                outerPoints[nextIndex],
+                innerPoints[nextIndex],
+                innerPoints[index]
+            ];
+            const innerMid = midpoint(innerPoints[index], innerPoints[nextIndex]);
+            const outerMid = midpoint(outerPoints[index], outerPoints[nextIndex]);
+            const contentPoint = lerpPoint(innerMid, outerMid, 0.6);
+            const theme = segmentThemes[index % segmentThemes.length];
+            const segment = document.createElement('div');
+
+            segment.className = 'cert-segment';
+            segment.style.clipPath = `polygon(${toPointString(clipPoints)})`;
+            segment.style.setProperty('--segment-top', theme.top);
+            segment.style.setProperty('--segment-bottom', theme.bottom);
+            segment.style.setProperty('--segment-border', theme.border);
+            segment.style.setProperty('--content-x', `${contentPoint.x.toFixed(3)}%`);
+            segment.style.setProperty('--content-y', `${contentPoint.y.toFixed(3)}%`);
+
+            if (revealed.has(index)) {
+                segment.classList.add('is-revealed');
+                const titleHtml = wrapTitle(cert.title)
+                    .map((line) => escapeHtml(line))
+                    .join('<br>');
+
+                segment.innerHTML = `
+                    <div class="cert-segment__content">
+                        <div class="cert-segment__title">${titleHtml}</div>
+                        <div class="cert-segment__issuer">${escapeHtml(cert.issuer)}</div>
+                        <a href="${cert.link}" target="_blank" rel="noopener noreferrer" class="cert-segment__verify">Verify</a>
+                    </div>
+                `;
+            } else {
+                segment.tabIndex = 0;
+                segment.setAttribute('role', 'button');
+                segment.setAttribute('aria-label', `Reveal hidden certification ${index + 1}`);
+
+                const reveal = () => {
+                    if (revealed.has(index)) return;
+                    revealed.add(index);
+                    renderBoard();
+                };
+
+                segment.addEventListener('click', reveal);
+                segment.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        reveal();
+                    }
+                });
+            }
+
+            board.appendChild(segment);
+        });
+
+        const hub = document.createElement('div');
+        const allRevealed = revealed.size === shuffledCerts.length;
+        hub.className = `cert-puzzle-hub${allRevealed ? ' is-complete' : ''}`;
+        hub.style.setProperty('--hub-points', hubPoints);
+        hub.innerHTML = allRevealed
+            ? `
+                <div class="cert-puzzle-hub__content">
+                    <div class="cert-puzzle-hub__eyebrow">Completed</div>
+                    <div class="cert-puzzle-hub__title">All Certifications Unlocked</div>
+                    <div class="cert-puzzle-hub__meta">Every credential on the board is now revealed.</div>
+                </div>
+            `
+            : `
+                <div class="cert-puzzle-hub__content">
+                    <div class="cert-puzzle-hub__eyebrow">Try Your Luck</div>
+                    <div class="cert-puzzle-hub__title">${revealed.size} / ${shuffledCerts.length} Unlocked</div>
+                    <div class="cert-puzzle-hub__meta">Pick a segment and reveal the certification behind it.</div>
+                </div>
+            `;
+
+        board.appendChild(hub);
+    };
+
+    renderBoard();
 }
 
 // --- Initialization ---
@@ -30,9 +206,12 @@ const init = () => {
     initAnimations();
     initMagneticText();
     initHeroBackground();
+    initHomeDraggables();
+    initEducationDots();
     initActiveNav();
     initGlobalScrollNav();
     initParallax();
+    initCustomCursor();
 };
 
 if (document.readyState === 'loading') {
@@ -102,6 +281,108 @@ function initMagneticText() {
         });
     });
 }
+function initHomeDraggables() {
+    const playables = document.querySelectorAll('[data-home-draggable]');
+    const hero = document.querySelector('.hero');
+    if (!playables.length || !hero) return;
+
+    let topLayer = 10;
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    playables.forEach(el => {
+        let drag = null;
+
+        const endDrag = (pointerId) => {
+            if (!drag || (pointerId !== undefined && drag.pointerId !== pointerId)) return;
+
+            const moved = drag.moved;
+            drag = null;
+            homeDragState.active = false;
+            if (moved) {
+                homeDragState.suppressUntil = Date.now() + 250;
+            }
+            el.classList.remove('is-dragging');
+
+            gsap.to(el, {
+                scale: 1,
+                duration: 0.2,
+                ease: 'power2.out',
+                overwrite: true
+            });
+        };
+
+        el.addEventListener('pointerdown', e => {
+            if (e.button !== undefined && e.button !== 0) return;
+
+            e.preventDefault();
+
+            const heroRect = hero.getBoundingClientRect();
+            const rect = el.getBoundingClientRect();
+            const currentX = Number(gsap.getProperty(el, 'x')) || 0;
+            const currentY = Number(gsap.getProperty(el, 'y')) || 0;
+            const baseLeft = rect.left - currentX;
+            const baseTop = rect.top - currentY;
+            const padding = 12;
+
+            drag = {
+                pointerId: e.pointerId,
+                startPointerX: e.clientX,
+                startPointerY: e.clientY,
+                startX: currentX,
+                startY: currentY,
+                minX: Math.min(heroRect.left + padding - baseLeft, heroRect.right - padding - baseLeft - rect.width),
+                maxX: Math.max(heroRect.left + padding - baseLeft, heroRect.right - padding - baseLeft - rect.width),
+                minY: Math.min(heroRect.top + padding - baseTop, heroRect.bottom - padding - baseTop - rect.height),
+                maxY: Math.max(heroRect.top + padding - baseTop, heroRect.bottom - padding - baseTop - rect.height),
+                moved: false
+            };
+
+            homeDragState.active = true;
+            el.classList.add('is-dragging');
+            el.style.zIndex = String(++topLayer);
+            el.setPointerCapture?.(e.pointerId);
+
+            gsap.to(el, {
+                scale: 1.03,
+                duration: 0.15,
+                ease: 'power2.out',
+                overwrite: true
+            });
+        });
+
+        window.addEventListener('pointermove', e => {
+            if (!drag || drag.pointerId !== e.pointerId) return;
+
+            const deltaX = e.clientX - drag.startPointerX;
+            const deltaY = e.clientY - drag.startPointerY;
+            const nextX = clamp(drag.startX + deltaX, drag.minX, drag.maxX);
+            const nextY = clamp(drag.startY + deltaY, drag.minY, drag.maxY);
+
+            if (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3) {
+                drag.moved = true;
+            }
+
+            gsap.set(el, { x: nextX, y: nextY });
+        });
+
+        window.addEventListener('pointerup', e => endDrag(e.pointerId));
+        window.addEventListener('pointercancel', e => endDrag(e.pointerId));
+
+        el.addEventListener('dblclick', () => {
+            homeDragState.active = false;
+            homeDragState.suppressUntil = Date.now() + 250;
+            el.classList.remove('is-dragging');
+            gsap.to(el, {
+                x: 0,
+                y: 0,
+                scale: 1,
+                duration: 0.45,
+                ease: 'power2.out'
+            });
+        });
+    });
+}
+
 // --- Parallax Effect ---
 function initParallax() {
     const rocket = document.querySelector('.floating-rocket');
@@ -219,7 +500,12 @@ function initActiveNav() {
     const links = document.querySelectorAll('.nav-links a');
 
     links.forEach(link => {
-        if (link.getAttribute('href') === path) {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        
+        // Check if the current pathname ends with the link's href
+        // This makes it work in subdirectories (like GitHub Pages)
+        if (path.endsWith(href) || (href === './' && (path.endsWith('/') || path.endsWith('index.html')))) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
@@ -230,19 +516,25 @@ function initActiveNav() {
 // --- Global Scroll Navigation ---
 function initGlobalScrollNav() {
     const pages = [
-        '/',
-        '/about.html',
-        '/projects.html',
-        '/education.html',
-        '/skills.html',
-        '/certifications.html',
-        '/contact.html'
+        './',
+        'about.html',
+        'projects.html',
+        'education.html',
+        'skills.html',
+        'certifications.html',
+        'contact.html'
     ];
     
-    let currentPath = window.location.pathname;
-    if (currentPath === '' || currentPath.endsWith('index.html')) currentPath = '/';
+    const path = window.location.pathname;
+    let currentIndex = -1;
     
-    const currentIndex = pages.indexOf(currentPath);
+    // Find the current page index by checking which page string the path ends with
+    pages.forEach((p, i) => {
+        if (path.endsWith(p) || (p === './' && path.endsWith('/')) || (p === './' && path.endsWith('index.html'))) {
+            currentIndex = i;
+        }
+    });
+
     if (currentIndex === -1) return;
     
     let isNavigating = false;
@@ -388,6 +680,53 @@ function initCustomCursor() {
             cursorOutline.style.borderColor = 'rgba(167, 139, 250, 0.7)';
             cursorOutline.style.background = 'transparent';
             cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+    });
+}
+
+function initEducationDots() {
+    const items = document.querySelectorAll('.education-item');
+    if (!items.length) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    items.forEach((item, index) => {
+        const dot = item.querySelector('.education-dot');
+        if (!dot) return;
+
+        if (!prefersReducedMotion) {
+            gsap.fromTo(dot, {
+                opacity: 0,
+                scale: 0.82
+            }, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.45,
+                delay: index * 0.08,
+                ease: 'power2.out',
+                overwrite: true
+            });
+        }
+
+        if (!supportsHover || prefersReducedMotion) return;
+
+        item.addEventListener('mouseenter', () => {
+            gsap.to(dot, {
+                scale: 1.08,
+                duration: 0.24,
+                ease: 'power2.out',
+                overwrite: true
+            });
+        });
+
+        item.addEventListener('mouseleave', () => {
+            gsap.to(dot, {
+                scale: 1,
+                duration: 0.32,
+                ease: 'power2.out',
+                overwrite: true
+            });
         });
     });
 }

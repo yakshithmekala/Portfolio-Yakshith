@@ -4,87 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Education | Yakshith</title>
-    <link rel="stylesheet" href="/src/style.css">
-    <style>
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            background: var(--glass-border);
-            top: 0;
-            bottom: 0;
-            left: 20px;
-        }
-        .timeline-item {
-            padding: 20px 0 20px 50px;
-            position: relative;
-        }
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: var(--accent-primary);
-            border-radius: 50%;
-            left: 15px;
-            top: 25px;
-            z-index: 1;
-            box-shadow: 0 0 10px var(--accent-primary);
-        }
-        .timeline-date {
-            font-size: 0.85rem;
-            color: var(--accent-primary);
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="src/style.css">
+
 </head>
 <body>
     <nav>
         <div class="logo">YAKSHITH</div>
         <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/about.html">About</a>
-            <a href="/projects.html">Projects</a>
-            <a href="/education.html" class="active">Education</a>
-            <a href="/skills.html">Skills</a>
-            <a href="/certifications.html">Certifications</a>
-            <a href="/contact.html">Contact</a>
+            <a href="./">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="education.html" class="active">Education</a>
+            <a href="skills.html">Skills</a>
+            <a href="certifications.html">Certifications</a>
+            <a href="contact.html">Contact</a>
         </div>
     </nav>
 
     <main class="container">
         <canvas id="hero-canvas" class="live-bg-canvas"></canvas>
-        <header class="section-header reveal">
-            <div class="glass-pill">Academic Journey</div>
-            <h2>Educational Background</h2>
-            <p>A timeline of my formal education and continuous learning efforts.</p>
+        <header class="section-header reveal education-header">
+            <h2>Academic Progression</h2>
+            <p>A concise view of the academic path shaping my current direction in data engineering, AI, and disciplined problem-solving.</p>
         </header>
 
-        <div class="timeline">
-            <div class="timeline-item reveal">
-                <div class="timeline-date">2023 - 2027</div>
-                <h3>B.Tech in Computer Science</h3>
-                <p style="color: var(--text-secondary);">KL University, Hyderabad - CGPA : 9.4</p>
-                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-secondary);">Focused in Data Engineering with AI.</p>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-date">2021 - 2023</div>
-                <h3>Intermediate Education</h3>
-                <p style="color: var(--text-secondary);">TSBIE - Percentage : 94%</p>
-                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-secondary);">MPC.</p>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-date">2020 - 2021</div>
-                <h3>High School</h3>
-                <p style="color: var(--text-secondary);">TG:SSC - GPA : 10.</p>
-                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-secondary);">Developed disiplane, time management skills, and a strong foundation in core subjects.</p>
-            </div>
+        <div class="education-timeline">
+            <article class="education-item reveal">
+                <span class="education-marker" aria-hidden="true">
+                    <span class="education-dot"></span>
+                </span>
+                <div class="education-panel">
+                    <div class="education-date">2023 - 2027</div>
+                    <h3>B.Tech in Computer Science</h3>
+                    <div class="education-meta">
+                        <span class="education-meta-main">KL University, Hyderabad</span>
+                        <span class="education-meta-score">9.4 CGPA</span>
+                    </div>
+                    <p class="education-copy">Focused in Data Engineering with AI. Strengthening my foundation in software engineering, and practical problem-solving.</p>
+                </div>
+            </article>
+            <article class="education-item reveal">
+                <span class="education-marker" aria-hidden="true">
+                    <span class="education-dot"></span>
+                </span>
+                <div class="education-panel">
+                    <div class="education-date">2021 - 2023</div>
+                    <h3>Intermediate Education</h3>
+                    <div class="education-meta">
+                        <span class="education-meta-main">TSBIE (MPC)</span>
+                        <span class="education-meta-score">94%</span>
+                    </div>
+                    <p class="education-copy">Delivered consistently strong performance while sharpening discipline, focus, and analytical clarity.</p>
+                </div>
+            </article>
+            <article class="education-item reveal">
+                <span class="education-marker" aria-hidden="true">
+                    <span class="education-dot"></span>
+                </span>
+                <div class="education-panel">
+                    <div class="education-date">2020 - 2021</div>
+                    <h3>High School</h3>
+                    <div class="education-meta">
+                        <span class="education-meta-main">TG:SSC</span>
+                        <span class="education-meta-score">10 GPA</span>
+                    </div>
+                    <p class="education-copy">Built strong core fundamentals early through consistent performance across essential subjects.</p>
+                </div>
+            </article>
         </div>
 
         <footer class="reveal" style="padding: 40px 0;">
@@ -97,6 +83,6 @@
         </footer>
     </main>
 
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="src/main.js"></script>
 </body>
 </html>
