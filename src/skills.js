@@ -7,10 +7,10 @@ if (canvas) {
     // Define Categories Mapping
     const categories = {
         'Full Stack Specializations': ['MERN Stack', 'PFSD', 'JFSD'],
-        'Programming': ['Python', 'Java', 'C', 'C++', 'JavaScript'],
-        'Core CS': ['DSA', 'OS', 'DBMS', 'Git'],
-        'Frontend': ['React', 'Next.js', 'HTML', 'CSS', 'GSAP', 'Vite', 'Figma'],
-        'Backend': ['Node.js', 'Express', 'SQL', 'MongoDB', 'Docker', 'AWS', 'Kubernetes']
+        'Programming': ['Python', 'TypeScript', 'JavaScript', 'Rust', 'Java', 'C++'],
+        'Core CS': ['DSA', 'OS', 'DBMS', 'Git', 'Docker', 'Vite', 'Tauri', 'PyQt5', 'Desktop-to-Web'],
+        'Frontend': ['React', 'Next.js', 'Svelte', 'HTML', 'CSS', 'GSAP'],
+        'Backend': ['Node.js', 'Express', 'SQL', 'MongoDB', 'REST APIs', 'Data Workflows']
     };
     
     // Gather all unique skills from categories
