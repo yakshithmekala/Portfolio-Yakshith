@@ -132,6 +132,22 @@ nav {
   transform: translateY(-5px);
 }
 
+.profile-card {
+  padding: 0 !important;
+}
+
+.profile-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: var(--transition-smooth);
+}
+
+.profile-card:hover img {
+  transform: scale(1.05);
+}
+
 .flex-between {
   display: flex;
   justify-content: space-between;
