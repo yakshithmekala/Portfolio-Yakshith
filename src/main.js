@@ -34,7 +34,7 @@ function renderCertifications() {
         .replaceAll('"', '&quot;')
         .replaceAll("'", '&#39;');
 
-    const wrapTitle = (title, maxChars = 18, maxLines = 3) => {
+    const wrapTitle = (title, maxChars = 14, maxLines = 3) => {
         const words = title.split(' ');
         const lines = [];
         let current = '';
@@ -80,8 +80,8 @@ function renderCertifications() {
 
     const revealed = new Set();
     const shuffledCerts = shuffle(certs);
-    const outerPoints = createRegularPolygon(shuffledCerts.length, 46);
-    const innerPoints = createRegularPolygon(shuffledCerts.length, 16);
+    const outerPoints = createRegularPolygon(shuffledCerts.length, 48);
+    const innerPoints = createRegularPolygon(shuffledCerts.length, 20);
     const hubPoints = toPointString(innerPoints);
     const segmentThemes = [
         {
@@ -125,7 +125,7 @@ function renderCertifications() {
             ];
             const innerMid = midpoint(innerPoints[index], innerPoints[nextIndex]);
             const outerMid = midpoint(outerPoints[index], outerPoints[nextIndex]);
-            const contentPoint = lerpPoint(innerMid, outerMid, 0.6);
+            const contentPoint = lerpPoint(innerMid, outerMid, 0.5);
             const theme = segmentThemes[index % segmentThemes.length];
             const segment = document.createElement('div');
 

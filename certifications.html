@@ -74,7 +74,12 @@
             left: var(--content-x);
             top: var(--content-y);
             transform: translate(-50%, -50%);
-            width: min(168px, 24vw);
+            width: min(160px, 21%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 0 2px;
             text-align: center;
             pointer-events: auto;
         }
@@ -85,7 +90,6 @@
             letter-spacing: -0.02em;
         }
         .cert-segment__issuer {
-            margin-top: 7px;
             color: rgba(255, 255, 255, 0.72);
             font-size: 0.74rem;
             line-height: 1.35;
@@ -95,7 +99,6 @@
             align-items: center;
             justify-content: center;
             min-height: 30px;
-            margin-top: 10px;
             padding: 6px 12px;
             border-radius: 999px;
             background: rgba(255, 255, 255, 0.08);
@@ -129,7 +132,7 @@
                 linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
         }
         .cert-puzzle-hub__content {
-            width: min(180px, 32vw);
+            width: min(176px, 24%);
             text-align: center;
         }
         .cert-puzzle-hub__eyebrow {
@@ -162,31 +165,71 @@
                 margin-bottom: 14px;
             }
             .cert-segment__content {
-                width: min(118px, 28vw);
+                width: min(108px, 22.5%);
+                gap: 4px;
             }
             .cert-segment__title {
-                font-size: 0.72rem;
+                font-size: 0.68rem;
             }
             .cert-segment__issuer {
-                font-size: 0.64rem;
+                font-size: 0.6rem;
+                line-height: 1.28;
             }
             .cert-segment__verify {
-                min-height: 26px;
-                margin-top: 8px;
-                padding: 5px 10px;
-                font-size: 0.65rem;
+                min-height: 24px;
+                padding: 4px 8px;
+                font-size: 0.6rem;
             }
             .cert-puzzle-hub__content {
-                width: min(122px, 28vw);
+                width: min(114px, 24%);
             }
             .cert-puzzle-hub__eyebrow {
-                font-size: 0.62rem;
+                font-size: 0.58rem;
             }
             .cert-puzzle-hub__title {
-                font-size: 0.92rem;
+                margin-top: 6px;
+                font-size: 0.86rem;
             }
             .cert-puzzle-hub__meta {
-                font-size: 0.66rem;
+                margin-top: 8px;
+                font-size: 0.62rem;
+            }
+        }
+        @media (max-width: 560px) {
+            .certifications-game {
+                max-width: none;
+            }
+            .certifications-puzzle {
+                width: min(100%, 380px);
+            }
+            .cert-segment__content {
+                width: min(84px, 23.5%);
+                gap: 3px;
+            }
+            .cert-segment__title {
+                font-size: 0.6rem;
+                line-height: 1.08;
+            }
+            .cert-segment__issuer {
+                font-size: 0.52rem;
+            }
+            .cert-segment__verify {
+                min-height: 22px;
+                padding: 4px 7px;
+                font-size: 0.55rem;
+            }
+            .cert-puzzle-hub__content {
+                width: min(90px, 24%);
+            }
+            .cert-puzzle-hub__eyebrow {
+                font-size: 0.52rem;
+            }
+            .cert-puzzle-hub__title {
+                font-size: 0.76rem;
+            }
+            .cert-puzzle-hub__meta {
+                font-size: 0.56rem;
+                line-height: 1.35;
             }
         }
     </style>
