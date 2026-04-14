@@ -42,12 +42,37 @@
             font-size: 0.75rem;
             font-weight: 500;
         }
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .project-card {
+                height: auto;
+                min-height: 280px;
+                padding: 22px;
+            }
+        }
+        @media (max-width: 480px) {
+            .project-card {
+                padding: 18px;
+                min-height: 240px;
+            }
+            .project-tags {
+                flex-wrap: wrap;
+            }
+        }
     </style>
 </head>
 <body>
     <nav>
         <div class="logo">YAKSHITH</div>
-        <div class="nav-links">
+        <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-links" id="nav-links">
             <a href="./">Home</a>
             <a href="about.html">About</a>
             <a href="projects.html" class="active">Projects</a>
