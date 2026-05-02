@@ -5,7 +5,8 @@ const certs = [
     { title: "AWS Cloud Practitioner ", issuer: "Amazon Web Services", date: "DEC 2025", link: "https://www.credly.com/badges/0dbe9c9d-09fb-4e9d-8e5a-cf70e275ec41/public_url" },
     { title: "MongoDB Associate Developer", issuer: "MongoDB", date: "DEC 2024", link: "https://www.credly.com/badges/56f8a116-1806-4985-b54a-238d5b4c903a/public_url" },
     { title: "Automation Anywhere Advanced", issuer: "Automation Anywhere", date: "JUL 2025", link: "https://certificates.automationanywhere.com/2990a7c7-2f79-4e9d-a305-4cd169432b73#acc.MjSgqEZ4" },
-    { title: "Meta Front-End Developer", issuer: "Meta", date: "Jun 2023", link: "#" }
+    { title: "MongoDB DBA certificate", issuer: "MongoDB", date: "May 2026", link: "https://www.credly.com/badges/d190c7b7-b3b9-456f-bd60-01220807b5c2/public_url" },
+    { title: "AWS Solutions Architect - Associate", issuer: "Amazon Web Services", date: "May 2026", link: "https://www.credly.com/badges/a2e9095c-68ba-4f4e-ae09-4e9d22792c37/public_url" }
 ];
 
 const homeDragState = {
